@@ -1,0 +1,35 @@
+FROM arm32v7/alpine
+
+ENV DEBUG=false \
+    DOCKER_HOST=unix:///var/run/docker.sock \
+    DOCKER_ARCH=armhf \
+    DOCKER_GEN_VERSION=0.7.4
+
+# Install packages required by the image
+RUN apk add --update \
+        bash \
+        ca-certificates \
+        coreutils \
+        curl \
+        jq \
+        openssl \
+    && rm /var/cache/apk/*
+
+
+# Install docker-gen
+RUN wget -q -O - https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VERSION/docker-gen-linux-$DOCKER_ARCH-$DOCKER_GEN_VERSION.tar.gz \
+ | tar -C /usr/local/bin -xvz
+
+# Install simp_le
+COPY /install_simp_le.sh /app/install_simp_le.sh
+RUN chmod +rx /app/install_simp_le.sh \
+    && sync \
+    && /app/install_simp_le.sh \
+    && rm -f /app/install_simp_le.sh
+
+COPY /app/ /app/
+
+WORKDIR /app
+
+ENTRYPOINT [ "/bin/bash", "/app/entrypoint.sh" ]
+CMD [ "/bin/bash", "/app/start.sh" ]
