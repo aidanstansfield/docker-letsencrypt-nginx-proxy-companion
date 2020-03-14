@@ -1,3 +1,21 @@
+# My Changes
+I've added support for arm32v7 architecture hosts (like the Raspberry Pi!)
+
+To find out the inspiration for this project, head over to [my blog](https://aidanstansfield.github.io)
+
+### Usage
+To use the arm32v7 architecture version, you can use the docker image available on [my repo](https://hub.docker.com/repository/docker/aidanstansfield/docker-letsencrypt-nginx-proxy-companion) with:
+
+`aidanstansfield/docker-letsencrypt-nginx-proxy-companion:arm32v7`
+
+Or, you can clone this repo and modify/build it yourself with
+
+`docker build -t docker-letsencrypt-nginx-proxy-companion -f Dockerfile.arm32v7 .`
+
+Now here's the rest of the README.md from the original repo.
+
+---
+
 [![Build Status](https://travis-ci.org/nginx-proxy/docker-letsencrypt-nginx-proxy-companion.svg?branch=master)](https://travis-ci.org/nginx-proxy/docker-letsencrypt-nginx-proxy-companion)
 [![GitHub release](https://img.shields.io/github/release/jrcs/docker-letsencrypt-nginx-proxy-companion.svg)](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/releases)
 [![Image info](https://images.microbadger.com/badges/image/jrcs/letsencrypt-nginx-proxy-companion.svg)](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion "Click to view the image on Docker Hub")
